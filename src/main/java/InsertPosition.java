@@ -15,6 +15,50 @@ public class InsertPosition {
      * @return return the index that a number should be inserted into a sorted array.
      */
     public int searchInsert(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length-1;
+
+        if (target < nums[left]) return left;
+        else if (target > nums[right]) return right+1;
+
+        // handling from both sides may slightly improve a linear approach here
+        // could easily be done by iterating through and comparing each element
+
+
+        /* must use nums.length-1 to avoid ArrayOutOfBounds Exception
+         * if not returned within for loop, should be added at very end (index nums.length)
+         * 
+         * for (int i = 0; i < nums.length-1; i++) {
+         *      if (target > nums[i]) {
+         *          if (target > nums[i+1]) i++;
+         *          else return i+1;
+         *      }
+         * 
+         * }
+         * 
+         * return nums.length;
+         */
+
+         
+        while (left <= right) {
+
+            if (target > nums[left])
+                if (target > nums[left+1]) {
+                    left++;
+                } 
+                else {
+                    return left+1;
+                }
+            if (target < nums[right]) {
+                if (target < nums[right-1]) {
+                    right--;
+                }
+                else {
+                    return right;
+                }
+            }
+        }
+
         return -1;
     }
 }
